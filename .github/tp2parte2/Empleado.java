@@ -14,9 +14,7 @@ public class Empleado {
         this.horasExtra = horasExtra;
         this.casado = casado;
         this.numeroHijos = numeroHijos;
-    }
-    public Empleado(String string, int i, String string2, char c, double d, double e, String string3, double f) {
-        //TODO Auto-generated constructor stub
+
     }
     public int getLegajo() {
         return legajo;
