@@ -1,35 +1,64 @@
+import java.util.Scanner;
+
 public class Main {
     public static void main(String[] args) {
-        EstacionServicio estacion = new EstacionServicio(5000, 0);
+        Scanner sc = new Scanner(System.in);
+        PilaInt pila = new PilaInt();
+        int opcion;
 
-        System.out.println("Combustible actual: " + estacion.getCantidadActual() + " litros.");
-        if (estacion.cargarCombustible(3000)) {
-            System.out.println("Se cargaron 3000 litros. Combustible restante: " + estacion.getCantidadActual());
-        } else {
-            System.out.println("No se pudo cargar 3000 litros (cantidad insuficiente o inválida).");
-        }
+        do {
+            System.out.println("\n=== CONTROL DE NIVELES ===");
+            System.out.println("1. Agregar nuevo nivel");
+            System.out.println("2. Mostrar nivel en la cima");
+            System.out.println("3. Contar apariciones de un valor");
+            System.out.println("4. Salir");
+            System.out.print("Opción: ");
+            opcion = sc.nextInt();
 
-    
-        if (estacion.reponerCombustible(6000)) {
-            System.out.println("Se repusieron 6000 litros. Total actual: " + estacion.getCantidadActual());
-        } else {
-            System.out.println("Error al reponer combustible.");
-        }
+            switch (opcion) {
+                case 1:
+                    System.out.print("Ingrese nivel de energía: ");
+                    int nivel = sc.nextInt();
+                    pila.meter(nivel);
+                    System.out.println("Nivel agregado con éxito.");
+                    break;
 
-        
-        if (estacion.cargarCombustible(10990)) {
-            System.out.println("Se cargaron 10990 litros. Combustible restante: " + estacion.getCantidadActual());
-        } else {
-            System.out.println("No se pudo cargar 10990 litros (cantidad insuficiente o inválida).");
-        }
+                case 2:
+                    if (!pila.estaVacia()) {
+                        
+                        PilaInt aux = new PilaInt();
+                        int cima = pila.sacar();
+                        System.out.println("Nivel en la cima: " + cima);
+                        aux.meter(cima);
+                        
+                        while (!aux.estaVacia()) {
+                            pila.meter(aux.sacar());
+                        }
+                    } else {
+                        System.out.println("La pila está vacía.");
+                    }
+                    break;
 
-    
-        if (estacion.reponerCombustible(12000)) {
-            System.out.println("Repuesto hasta capacidad máxima. Total actual: " + estacion.getCantidadActual());
-        }
+                case 3:
+                    if (!pila.estaVacia()) {
+                        System.out.print("Ingrese valor a buscar: ");
+                        int x = sc.nextInt();
+                        int apariciones = pila.cuantasApariciones(x);
+                        System.out.println("El valor " + x + " aparece " + apariciones + " veces en la pila.");
+                    } else {
+                        System.out.println("No hay elementos en la pila.");
+                    }
+                    break;
 
-        System.out.println("Capacidad máxima: " + estacion.getCapacidadMaxima());
-        System.out.println("Nivel final de combustible: " + estacion.getCantidadActual());
+                case 4:
+                    System.out.println("Programa finalizado.");
+                    break;
+
+                default:
+                    System.out.println("Opción inválida, intente nuevamente.");
+            }
+
+        } while (opcion != 4);
+        sc.close();
     }
 }
-
