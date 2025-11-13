@@ -1,0 +1,28 @@
+package deportes;
+
+public class MainDeportista {
+    public static void main(String[] args) {
+        Deportista d1 = new Deportista("Ana", 22, "Tenis", 1500);
+        Deportista d2 = new Deportista("Luis", 19, "Futbol", 1200);
+
+        System.out.println(d1.toString());
+        System.out.println(d2.toString());
+
+        if (d1.esMayorExperimentdo(d2)) {
+            System.out.println(d1.getNombre() + " tiene mas punto que " + d2.getNombre());
+        } else {
+            System.out.println(d1.getNombre() + " Ambos tienen la misma cantidad de puntos " + d2.getNombre());
+        }
+
+        if (d1.esMayorDeEdad()) {
+            System.out.println(d1.getNombre() + " es mayor de edad.");
+        } else {
+            System.out.println(d1.getNombre() + " no es mayor de edad.");
+        }
+        if (d2.esMayorDeEdad()) {
+            System.out.println(d2.getNombre() + " es mayor de edad.");
+        } else {
+            System.out.println(d2.getNombre() + " no es mayor de edad.");
+        }
+    }
+}
